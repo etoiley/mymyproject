@@ -35,17 +35,18 @@ public class Member {
     @Column(name = "USER_ROLE")
     private String userRole;
 
-    private Member(Long userIdx, String userId, String userPassword, String userRole) {
+    private Member(Long userIdx, String userId, String userPassword, String userName, String userRole) {
         this.userIdx = userIdx;
         this.userId = userId;
         this.userPassword = userPassword;
+        this.userName = userName;
         this.userRole = userRole;
     }
 
     protected Member() {}
 
-    public static Member createUser(String userId, String userPassword, PasswordEncoder passwordEncoder) {
-        return new Member(null, userId, passwordEncoder.encode(userPassword), "USER");
+    public static Member createUser(String userId, String userPassword, PasswordEncoder passwordEncoder, String userName) {
+        return new Member(null, userId, passwordEncoder.encode(userPassword), userName, "USER");
     }
 
     public Long getUserIdx() {
@@ -58,6 +59,10 @@ public class Member {
 
     public String getUserPassword() {
         return userPassword;
+    }
+    
+    public String getUserName() {
+    	return userName;
     }
 
     public String getUserRole() {

@@ -35,8 +35,9 @@ public class LoginService {
     	logger.debug("LOGINSERVICE JOIN{}", uservo);
     	String userid = uservo.getUserId();
     	String pw = uservo.getUserPassword();
+    	String userName = uservo.getUserName();
     	
-        Member member = Member.createUser(userid, pw, passwordEncoder);
+        Member member = Member.createUser(userid, pw, passwordEncoder, userName);
         validateDuplicateMember(member);
         loginrepository.save(member);
 

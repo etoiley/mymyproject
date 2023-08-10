@@ -11,15 +11,15 @@
 	<form class="form-signin" method="post" action="/register-process.lo">
 		<p>
 			<label for="userId" class="sr-only">아이디</label>
-			<input type="text" id="userId" name="userId" class="form-control" placeholder="아이디" >
+			<input type="text" id="userId" name="userId" class="form-control" placeholder="아이디" required>
 		</p>
 		<p>
 			<label for="userPassword" class="sr-only">비밀번호</label>
-			<input type="password" id="userPassword" name="userPassword" class="form-control" placeholder="비번" >
+			<input type="password" id="userPassword" name="userPassword" class="form-control" placeholder="비번" required >
 		</p>
 		<p>
 			<label for="userName" class="sr-only">이름</label>
-			<input type="text" id="userName" name="userName" class="form-control" placeholder="이름" >
+			<input type="text" id="userName" name="userName" class="form-control" placeholder="이름" required>
 		</p>
 		<p>
 			<label for="userEmail" class="sr-only">이메일</label>
