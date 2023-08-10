@@ -2,12 +2,15 @@ package com.example.demo.login.service;
 
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.login.domain.Member;
 import com.example.demo.login.repository.LoginRepository;
+import com.example.demo.login.vo.UserVo;
 
 @Service
 public class LoginService {
@@ -15,6 +18,8 @@ public class LoginService {
 	private final PasswordEncoder passwordEncoder;
 	
     private final LoginRepository loginrepository;
+    
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     public LoginService(LoginRepository loginrepository, PasswordEncoder passwordEncoder) {
@@ -26,7 +31,11 @@ public class LoginService {
         return loginrepository.findByUserId(userId);
     }
     
-    public Long join(String userid, String pw) {
+    public Long join(UserVo uservo) {
+    	logger.debug("LOGINSERVICE JOIN{}", uservo);
+    	String userid = uservo.getUserId();
+    	String pw = uservo.getUserPassword();
+    	
         Member member = Member.createUser(userid, pw, passwordEncoder);
         validateDuplicateMember(member);
         loginrepository.save(member);
@@ -40,4 +49,5 @@ public class LoginService {
 		                    throw new IllegalStateException("이미 존재하는 회원입니다.");
 		                });
     }
+
 }

@@ -28,7 +28,11 @@ public class SecurityConfig {
 		 http.csrf().disable().cors().disable()
          .authorizeHttpRequests(request -> request
                  .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
-                 .requestMatchers(new AntPathRequestMatcher("/resources/image/**"),new AntPathRequestMatcher("/registerForm.lo")).permitAll()
+                 .requestMatchers(
+                		 		new AntPathRequestMatcher("/resources/image/**")
+                		 		,new AntPathRequestMatcher("/registerForm.lo")
+                		 		,new AntPathRequestMatcher("/register-process.lo")
+                		 		).permitAll()
                  .anyRequest().authenticated()
          )
          .formLogin(login -> login

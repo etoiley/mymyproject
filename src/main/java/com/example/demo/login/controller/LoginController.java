@@ -2,16 +2,21 @@ package com.example.demo.login.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.demo.login.service.LoginService;
 import com.example.demo.login.vo.UserVo;
 
 @Controller
 public class LoginController {
 	
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	
+	@Autowired
+	private LoginService loginservice;
 	
 	/**로그인 성공 후 메인으로
 	 * @return
@@ -55,6 +60,7 @@ public class LoginController {
 	@RequestMapping("/register-process.lo")
 	public String insertUser(UserVo uservo) {
 		logger.debug("회원가입하러 왔어요{}", uservo);
+		loginservice.join(uservo);
 		
 		return "redirect:/loginForm.lo";
 	}
